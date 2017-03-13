@@ -173,21 +173,19 @@ VIEW
 view : Model -> Html Msg
 view model =
     div [ id "app-container" ]
-        [ landingSection model
+        [ div   ( Cog.plug BGFader model
+                    ++ [ id "bg-fader" ]
+                )
+                []
+        , landingSection model
         ]
 
 landingSection : Model -> Html Msg
 landingSection model =
-    div [ id "portfolio"]
-        [ div   ( Cog.plug BGFader model
-                    ++ [ id "bg-fader" ]
-                )
-            []
-        , section [ id "landing" ]
-            [ div [ class "columns is-mobile" ]
-                [ Logo.logo model
-                , Intro.intro model
-                , Menu.menu model ToggleMenu MenuHover MenuUnhover
-                ]
+    section [ id "landing" ]
+        [ div [ class "columns is-mobile" ]
+            [ Logo.logo model
+            , Intro.intro model
+            , Menu.menu model ToggleMenu MenuHover MenuUnhover
             ]
         ]
