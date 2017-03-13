@@ -1,0 +1,55 @@
+#intro {
+  color: #ddd;
+  padding: 25vh 0;
+  font-family: 'Roboto', sans-serif;
+  font-size: 2rem;
+  @media screen and ( min-width: 501px ) {
+    font-size: 3rem;
+  }
+  @media screen and ( min-width: 769px ) {
+    font-size: 4rem;
+  }
+  @media screen and ( min-width: 1001px ) {
+    font-size: 5rem;
+  }
+}
+
+#greeting {
+  position: relative;
+}
+
+#introduction1 {
+  position:relative;
+  top: -5px;
+  left: -8px;
+  @media screen and ( min-width: 501px ) {
+    top: -15px;
+    left: -9px;
+  }
+  @media screen and ( min-width: 769px ) {
+    top: -25px;
+    left: -10px;
+  }
+  @media screen and ( min-width: 1001px ) {
+    top: -35px;
+    left: -11px;
+  }
+}
+
+#introduction2 {
+  position: relative;
+  top: -5px;
+  right: -4;
+  @media screen and ( min-width: 501px ) {
+    top: -15px;
+    right: -5px;
+  }
+  @media screen and ( min-width: 769px ) {
+    top: -25px;
+    right: -6px;
+  }
+  @media screen and ( min-width: 1001px ) {
+    top: -35px;
+    right: -7px;
+  }
+}

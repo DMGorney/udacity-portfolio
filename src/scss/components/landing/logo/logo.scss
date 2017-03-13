@@ -1,0 +1,65 @@
+#logo {
+  height: 130px;
+  position: relative;
+  top: -20px;
+}
+
+#logo-d {
+  font-family: 'Holtwood One SC', serif;
+  font-size: 6rem;
+  color: #ddd;
+  position: absolute;
+}
+
+#logo-cog {
+  font-size: 5.5rem;
+  color: #111;
+  position: absolute;
+  top: 24px;
+  left: 11px;
+  z-index: 1000;
+}
+
+#logo-fill {
+  background-color: #111;
+  position: absolute;
+  top: 45px;
+  left: 29px;
+  height: 30px;
+  width: 30px;
+  z-index: 500;
+}
+
+#mini-cogs {
+  position: absolute;
+  height: 35px;
+  width: 35px;
+  top: 45px;
+  left: 25px;
+}
+
+#cog-container {
+  position: relative;
+}
+
+#mini-cogs-base {
+  color: #eee;
+  position: absolute;
+  z-index: 1500;
+  font-size: 1.5rem;
+}
+
+#logo-mini-cog-1 {
+  @extend #mini-cogs-base;
+}
+
+#logo-mini-cog-2 {
+  @extend #mini-cogs-base;
+  left: 20px;
+}
+
+#logo-mini-cog-3 {
+  @extend #mini-cogs-base;
+  left: 10px;
+  top: 16px;
+}

@@ -1,0 +1,224 @@
+#menu-container {
+  z-index: 9000;
+}
+
+#menu {
+  position: relative;
+  border: solid 1px #ddd;
+  border-radius: 5px;
+  height: 60px;
+  width: 70px;
+  padding: 10px;
+  top: 5px;
+  left: -5px;
+  margin-left: auto;
+  z-index: 9000;
+}
+
+#line-container {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+  align-items: center;
+  height: 100%;
+  width: 100%;
+  z-index: 9000;
+}
+
+.menu-line {
+  position: relative;
+  border: 1px solid #eee;
+  width: 70%;
+  z-index: 9000;
+}
+
+#menu-item-container {
+  position: relative;
+  left: -10px;
+  bottom: -10px;
+  z-index: 9000;
+}
+
+#menu-bio {
+  position: absolute;
+  top: -60px;
+  right: 45px;
+  border: solid 5px $darkest-secondary;
+  border-radius: 50px;
+  background-color: #011;
+  height: 70px;
+  width: 70px;
+  flex-direction: column;
+  justify-content: space-around;
+  z-index: 9100;
+}
+
+#bio-wrapper {
+  position: relative;
+  height: 100%;
+  width: 100%;
+  z-index: 9100;
+}
+
+#bio-icon-wrapper {
+  position: absolute;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100%;
+  width: 100%;
+  z-index: 9100;
+}
+
+#bio-icon {
+  color: #ccc;
+  font-size: 2.7rem;
+  position: relative;
+  top: -5px;
+  z-index: 9100;
+}
+
+#bio-textbubble {
+  position: absolute;
+  left: -20px;
+  top: 60px;
+  border: solid 5px $darkest-secondary;
+  border-radius: 10px;
+  background-color: $darkest-primary;
+  color: #ddd;
+  height: 35px;
+  width: 100px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 9100;
+}
+
+#bio-text-wrapper {
+  position: relative;
+  z-index: 9100;
+}
+
+#bio-textbubble::after {
+  content: " ";
+  position: absolute;
+  bottom: 100%;
+  left: 50%;
+  margin-left: -20px;
+  border-width: 20px;
+  border-style: solid;
+  border-color: transparent transparent $darkest-secondary transparent;
+  z-index: 9100;
+}
+
+#menu-skills {
+  @extend #menu-bio;
+  top: 50px;
+  border: solid 5px $dark-secondary;
+  background-color: #011;
+}
+
+#skills-wrapper {
+  @extend #bio-wrapper;
+}
+
+#skills-icon-wrapper {
+  @extend #bio-icon-wrapper;
+}
+
+#skills-icon {
+  @extend #bio-icon;
+  color: #ddd;
+  top: -2px;
+  right: -2px;
+}
+
+#skills-textbubble {
+  @extend #bio-textbubble;
+  border: solid 5px $dark-secondary;
+  background-color: $dark-primary;
+}
+
+#skills-textbubble::after {
+  @extend #bio-textbubble::after;
+  border-color: transparent transparent $dark-secondary transparent;
+}
+
+#skills-text-wrapper {
+  @extend #bio-text-wrapper;
+}
+
+#menu-projects {
+  @extend #menu-bio;
+  top: 160px;
+  border: solid 5px $secondary;
+  background-color: #011;
+}
+
+#projects-wrapper {
+  @extend #bio-wrapper;
+}
+
+#projects-icon-wrapper {
+  @extend #bio-icon-wrapper;
+}
+
+#projects-icon {
+  @extend #bio-icon;
+  color: #eee;
+  left: -2px;
+  top: -2px;
+}
+
+#projects-textbubble {
+  @extend #bio-textbubble;
+  border: solid 5px $secondary;
+  background-color: $primary;
+  // left: -35px;
+  // width: 130px;
+}
+
+#projects-textbubble::after {
+  @extend #bio-textbubble::after;
+  border-color: transparent transparent $secondary transparent;
+}
+
+#projects-text-wrapper {
+  @extend #bio-text-wrapper;
+}
+
+#menu-contact {
+  @extend #menu-bio;
+  top: 270px;
+  border: solid 5px $light-secondary;
+  background-color: #011;
+}
+
+#contact-wrapper {
+  @extend #bio-wrapper;
+}
+
+#contact-icon-wrapper {
+  @extend #bio-icon-wrapper;
+}
+
+#contact-icon {
+  @extend #bio-icon;
+  color: #fff;
+}
+
+#contact-textbubble {
+  @extend #bio-textbubble;
+  border: solid 5px $light-secondary;
+  background-color: $light-primary;
+}
+
+#contact-textbubble::after {
+  @extend #bio-textbubble::after;
+  border-color: transparent transparent $light-secondary transparent;
+}
+
+#contact-text-wrapper {
+  @extend #bio-text-wrapper;
+}

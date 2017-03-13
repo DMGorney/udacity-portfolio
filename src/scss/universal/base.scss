@@ -1,0 +1,48 @@
+$primary: #41557B;
+$secondary: #DFC28D;
+
+$darkest-primary: mix($primary, #111, 75%);
+$dark-primary: mix($primary, #777, 75%);
+$light-primary: mix($primary, #aaa, 75%);
+$lightest-primary: mix($primary, #fff, 75%);
+
+$darkest-secondary: mix($secondary, #111, 75%);
+$dark-secondary: mix($secondary, #777, 75%);
+$light-secondary: mix($secondary, #aaa, 75%);
+$lightest-secondary: mix($secondary, #fff, 75%);
+
+.is-secondary {
+  color: $secondary;
+}
+
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  max-width: 100%;
+  max-height: 100%;
+  overflow: hidden;
+}
+
+#app-container {
+  max-width: 100%;
+  max-height: 100%;
+  height: 100%;
+  width: 100%;
+  overflow: hidden;
+}
+
+#portfolio {
+  height: 100%;
+  width: 100%;
+}
+
+#bg-fader {
+  position: absolute;
+  height: 100%;
+  width: 100%;
+  z-index: 8000;
+  background-color: rgba(0, 17, 17, .97);
+}
