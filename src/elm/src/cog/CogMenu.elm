@@ -60,14 +60,18 @@ configShard vars cogMsg =
                 ( easing
                     { duration = ( 300 * millisecond )
                     , ease = Ease.inOutElastic }
-                    )
+                )
                 [ rotate ( turn 0 )
                 , top ( percent 0 )
                 , borderColor ( Color.rgb 238 238 238 )
                 ]
         , sequences =
             [( MenuOpen,
-                [ to
+                [ toWith
+                    ( easing
+                        { duration = ( 1000 * millisecond )
+                        , ease = Ease.inOutElastic }
+                    )
                     [ rotate ( turn 0.125 )
                     , top ( percent 33 )
                     , borderColor ( Color.rgb 65 85 123 )
@@ -122,7 +126,11 @@ configShard vars cogMsg =
                 ]
         , sequences =
             [( MenuOpen,
-                [ to
+                [ toWith
+                    ( easing
+                        { duration = ( 1000 * millisecond )
+                        , ease = Ease.inOutElastic }
+                    )
                     [ rotate ( turn ( -0.125 ) )
                     , borderColor ( Color.rgb 65 85 123 )
                     ]
