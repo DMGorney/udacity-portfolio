@@ -178,6 +178,7 @@ view model =
                 )
                 []
         , landingSection model
+        , bioSection model
         ]
 
 landingSection : Model -> Html Msg
@@ -187,5 +188,13 @@ landingSection model =
             [ Logo.logo model
             , Intro.intro model
             , Menu.menu model ToggleMenu MenuHover MenuUnhover
+            ]
+        ]
+
+bioSection : Model -> Html msg
+bioSection model =
+    section [ id "bio" ]
+        [ div [ class "columns" ]
+            [
             ]
         ]
