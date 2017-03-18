@@ -6,6 +6,7 @@ import Html.Attributes exposing (..)
 import Animation exposing (turn, px)
 import Update.Extra.Infix exposing ((:>))
 import Task
+
 import CogTypes exposing ( Name(..), Trigger(..), MenuState(..), CogAnimMsg(..) )
 import Cog
 import CogFile

@@ -6,46 +6,78 @@ import Ease
 import Time exposing (millisecond)
 import Color
 
+import CogFormat exposing ( named, initialize, initializeWith, animations,
+                            immediate )
+
 import CogTypes exposing (..)
 import CogGears
 import CogGreetings
 import CogMenu
 
-
 config vars cogMsg =
-    [ { name = BGFader
-     , init =
-         styleWith
-             ( easing
-                 { duration = ( 350 * millisecond)
-                 , ease = Ease.inOutCirc }
-             )
-             [ opacity 0
-             , display none
-             ]
-     , sequences =
-         [( MenuOpen,
-            [ set
-                [ display block ]
-            , to
-                 [ opacity 1
-                 ]
-            ]
-          )
-         ,( MenuClose,
-            [ to
+    [ named BGFader
+            |> initializeWith
+                ( 350 , Ease.inOutCirc )
                 [ opacity 0
+                , display none
                 ]
-            , set
-                [ display none ]
-            ]
-          )
-         ]
-     }
+            |> immediate
+                MenuOpen
+                    [ set
+                        [ display block ]
+                    , to
+                         [ opacity 1
+                         ]
+                    ]
+            |> immediate
+                MenuClose
+                    [ to
+                        [ opacity 0
+                        ]
+                    , set
+                        [ display none ]
+                    ]
     ]
         ++ (CogGears.configShard vars cogMsg)
         ++ (CogGreetings.configShard vars cogMsg)
         ++ (CogMenu.configShard vars cogMsg)
+
+
+
+-- config vars cogMsg =
+--     [ { name = BGFader
+--      , init =
+--          styleWith
+--              ( easing
+--                  { duration = ( 350 * millisecond)
+--                  , ease = Ease.inOutCirc }
+--              )
+--              [ opacity 0
+--              , display none
+--              ]
+--      , sequences =
+--          [( MenuOpen,
+--             [ set
+--                 [ display block ]
+--             , to
+--                  [ opacity 1
+--                  ]
+--             ]
+--           )
+--          ,( MenuClose,
+--             [ to
+--                 [ opacity 0
+--                 ]
+--             , set
+--                 [ display none ]
+--             ]
+--           )
+--          ]
+--      }
+--     ]
+--         ++ (CogGears.configShard vars cogMsg)
+--         ++ (CogGreetings.configShard vars cogMsg)
+--         ++ (CogMenu.configShard vars cogMsg)
 
 
 
