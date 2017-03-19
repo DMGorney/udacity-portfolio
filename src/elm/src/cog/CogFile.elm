@@ -3,18 +3,24 @@ module CogFile exposing (..)
 import Animation exposing (..)
 import Animation.Messenger exposing (send)
 import Ease
-import Time exposing (millisecond)
 import Color
+import Update.Extra.Infix exposing ((:>))
 
 import CogFormat exposing ( named, initialize, initializeWith, animations,
                             immediate )
 
-import CogTypes exposing (..)
+import SharedTypes exposing (..)
 import CogGears
 import CogGreetings
 import CogMenu
 
-config vars cogMsg =
+--MODEL
+
+{--
+Animation Configs
+--}
+
+config initVars =
     [ named BGFader
             |> initializeWith
                 ( 350 , Ease.inOutCirc )
@@ -26,66 +32,24 @@ config vars cogMsg =
                     [ set
                         [ display block ]
                     , to
-                         [ opacity 1
-                         ]
+                         [ opacity 1 ]
                     ]
             |> immediate
                 MenuClose
                     [ to
-                        [ opacity 0
-                        ]
+                        [ opacity 0 ]
                     , set
                         [ display none ]
                     ]
     ]
-        ++ (CogGears.configShard vars cogMsg)
-        ++ (CogGreetings.configShard vars cogMsg)
-        ++ (CogMenu.configShard vars cogMsg)
-
-
-
--- config vars cogMsg =
---     [ { name = BGFader
---      , init =
---          styleWith
---              ( easing
---                  { duration = ( 350 * millisecond)
---                  , ease = Ease.inOutCirc }
---              )
---              [ opacity 0
---              , display none
---              ]
---      , sequences =
---          [( MenuOpen,
---             [ set
---                 [ display block ]
---             , to
---                  [ opacity 1
---                  ]
---             ]
---           )
---          ,( MenuClose,
---             [ to
---                 [ opacity 0
---                 ]
---             , set
---                 [ display none ]
---             ]
---           )
---          ]
---      }
---     ]
---         ++ (CogGears.configShard vars cogMsg)
---         ++ (CogGreetings.configShard vars cogMsg)
---         ++ (CogMenu.configShard vars cogMsg)
-
-
+        ++ (CogGears.configShard initVars)
+        ++ (CogGreetings.configShard initVars)
+        ++ (CogMenu.configShard initVars)
 
 {--
     CogFile Variables section.
     Any animation-related state that animations depend on to function properly.
 --}
---MODEL
 
 type alias Vars =
     { menuState : MenuState
@@ -95,9 +59,10 @@ type alias Vars =
     , menuItemRightOffset : Animation.Length
     }
 
+initVars : Vars
 initVars =
     { menuState =
-        Closed
+        MenuIsClosed
     , gearSpeedFactor =
         0.8
     , logoCogDelay =
@@ -110,12 +75,63 @@ initVars =
 
 --UPDATE
 
-openMenu vars =
-    { vars
-        | menuState = Open
-    }
+{--
+    CogFile Events section.
+    Any application events that trigger chunks or sequences of animations.
+--}
 
-closeMenu vars =
-    { vars
-        | menuState = Closed
-    }
+
+handleEvent event update model =
+    let
+        bits =
+            model.bits
+
+        cogVars =
+            model.cogVars
+
+    in
+        case event of
+            KickStart ->
+                (model, Cmd.none)
+                    :> update ( CogChunk Appear )
+                    :> update ( CogChunk StartGears )
+
+            ToggleMenu ->
+                if cogVars.menuState == MenuIsClosed then
+                    let
+                        opened =
+                            { cogVars
+                                | menuState = MenuIsOpen
+                            }
+
+                    in
+                        ({ model
+                            | cogVars = opened
+                        }, Cmd.none )
+                            :> update (CogChunk MenuOpen)
+                else
+                    let
+                        closed =
+                            { cogVars
+                                | menuState = MenuIsClosed
+                            }
+
+                    in
+                        ({ model
+                            | cogVars = closed
+                        }, Cmd.none )
+                            :> update (CogChunk MenuClose)
+
+            MenuHover ->
+                if cogVars.menuState == MenuIsClosed then
+                    (model, Cmd.none)
+                        :> update (CogChunk MenuHovered)
+                else
+                    (model, Cmd.none)
+
+            MenuUnhover ->
+                if cogVars.menuState == MenuIsClosed then
+                    (model, Cmd.none)
+                        :> update (CogChunk MenuUnhovered)
+                else
+                    (model, Cmd.none)

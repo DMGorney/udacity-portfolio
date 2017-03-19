@@ -3,19 +3,20 @@ module Menu exposing (..)
 import Html exposing (..)
 import Html.Attributes exposing (..)
 import Html.Events exposing (..)
-import CogTypes exposing ( Name(..), Trigger(..) )
 import Cog
 
-menu model menuToggleMsg menuHoverMsg menuUnhoverMsg =
+import SharedTypes exposing (..)
+
+menu model =
     div [ class "column is-one-quarter"]
         [ div [ class "columns" ]
             [ div [ id "menu-container", class "column" ]
                 [ div
                     ( Cog.plug MenuIcon model
                         ++  [ id "menu"
-                            , onClick menuToggleMsg
-                            , onMouseOver menuHoverMsg
-                            , onMouseOut menuUnhoverMsg
+                            , onClick ( CogEvent ToggleMenu )
+                            , onMouseOver ( CogEvent MenuHover )
+                            , onMouseOut ( CogEvent MenuUnhover )
                             ]
                     )
                     [ div [ id "line-container"]

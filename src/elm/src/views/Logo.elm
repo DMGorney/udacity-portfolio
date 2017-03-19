@@ -2,8 +2,9 @@ module Logo exposing (..)
 
 import Html exposing (..)
 import Html.Attributes exposing (..)
-import CogTypes exposing ( Name(..), Trigger(..) )
 import Cog
+
+import SharedTypes exposing (..)
 
 logo model =
     div [ class "column is-one-quarter"]

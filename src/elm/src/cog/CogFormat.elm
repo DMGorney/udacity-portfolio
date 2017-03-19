@@ -6,18 +6,18 @@ import Maybe exposing (Maybe(..))
 import Ease
 import Time exposing (millisecond)
 
-import CogTypes
+import SharedTypes exposing (..)
 
 type alias Config msg =
-    { name : CogTypes.Name
+    { name : SharedTypes.Name
     , init : (Animation.Messenger.State msg)
     , sequences : List (Sequence msg)
     }
 
 type alias Sequence msg =
-    ( CogTypes.Trigger , List (Animation.Messenger.Step msg) )
+    ( SharedTypes.Trigger , List (Animation.Messenger.Step msg) )
 
-named : CogTypes.Name -> (Config msg)
+named : SharedTypes.Name -> (Config msg)
 named elementName =
     { name =
         elementName
@@ -63,11 +63,11 @@ animations : (Config msg) -> (Config msg)
 animations config =
     config
 
-(=>) : CogTypes.Trigger -> List (Animation.Messenger.Step msg) -> Sequence msg
+(=>) : SharedTypes.Trigger -> List (Animation.Messenger.Step msg) -> Sequence msg
 (=>) trigger steps =
     ( trigger, steps )
 
-immediate : CogTypes.Trigger -> List (Animation.Messenger.Step msg) -> (Config msg) -> (Config msg)
+immediate : SharedTypes.Trigger -> List (Animation.Messenger.Step msg) -> (Config msg) -> (Config msg)
 immediate trigger steps config =
     let
         sequence =

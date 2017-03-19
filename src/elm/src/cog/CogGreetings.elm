@@ -6,9 +6,9 @@ import Ease
 import Time exposing (millisecond)
 import Color
 
-import CogTypes exposing (..)
+import SharedTypes exposing (..)
 
-configShard vars cogMsg =
+configShard vars =
     [{ name = Greeting
      , init =
          styleWith

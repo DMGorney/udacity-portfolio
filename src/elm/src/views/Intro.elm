@@ -2,9 +2,9 @@ module Intro exposing (..)
 
 import Html exposing (..)
 import Html.Attributes exposing (..)
-import CogTypes exposing ( Name(..), Trigger(..) )
 import Cog
 
+import SharedTypes exposing (..)
 
 intro model =
     div [ id "intro", class "column is-half" ]
@@ -27,7 +27,7 @@ introItem {target, itemID, classes, content} model =
         ]
 
 type alias IntroItem =
-    { target : CogTypes.Name
+    { target : SharedTypes.Name
     , itemID : String
     , classes : String
     , content : String

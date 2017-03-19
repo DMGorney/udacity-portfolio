@@ -2,34 +2,34 @@ module Cog exposing (..)
 
 import Animation
 import Animation.Messenger
-import CogFile
 import EveryDict
 import Array exposing (Array)
 import Maybe.Extra exposing ((?))
 
-import CogTypes
+import CogFile
+import SharedTypes
 
 --MODEL
 type alias Bits msg =
-    EveryDict.EveryDict CogTypes.Name (TotalSequences msg)
+    EveryDict.EveryDict SharedTypes.Name (TotalSequences msg)
 
 type alias Bit msg =
-    ( CogTypes.Name , (TotalSequences msg) )
+    ( SharedTypes.Name , (TotalSequences msg) )
 
 type alias TotalSequences msg =
     { current : (Animation.Messenger.State msg)
-    , sequences : EveryDict.EveryDict CogTypes.Trigger
+    , sequences : EveryDict.EveryDict SharedTypes.Trigger
                     ( (Animation.Messenger.State msg) -> (Animation.Messenger.State msg) )
     }
 
 type alias Config msg =
-    { name : CogTypes.Name
+    { name : SharedTypes.Name
     , init : (Animation.Messenger.State msg)
     , sequences : List (Sequence msg)
     }
 
 type alias Sequence msg =
-    ( CogTypes.Trigger , List (Animation.Messenger.Step msg) )
+    ( SharedTypes.Trigger , List (Animation.Messenger.Step msg) )
 
 --INIT
 
@@ -84,7 +84,7 @@ make configList =
             in
                 ( name, totalSequences )
 
-        -- processSequences : CogTypes.Name -> (Animation.Messenger.State msg) -> List (Sequence msg) -> (TotalSequences msg)
+        -- processSequences : SharedTypes.Name -> (Animation.Messenger.State msg) -> List (Sequence msg) -> (TotalSequences msg)
         processSequences name init rawSequences =
             let
                 processedSequences =
@@ -233,17 +233,6 @@ triggerBit bits name trigger =
 
 triggerChunk bits trigger =
     let
-        -- bitsWithTrigger =
-        --     EveryDict.filter hasTrigger bits
-        --
-        -- hasTrigger name totalSequence =
-        --     let
-        --         sequences =
-        --             totalSequence.sequences
-        --
-        --     in
-        --         EveryDict.member trigger sequences
-
         triggered =
             EveryDict.map triggerElement bits
 

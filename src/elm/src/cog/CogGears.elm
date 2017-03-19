@@ -6,9 +6,9 @@ import Ease
 import Time exposing (millisecond)
 import Color
 
-import CogTypes exposing (..)
+import SharedTypes exposing (..)
 
-configShard vars cogMsg =
+configShard vars =
     [   { name = LogoCog
         , init =
             style
@@ -69,7 +69,7 @@ configShard vars cogMsg =
                     ( List.append
                             delayedTicks
                             [ set   [ rotate ( turn 0 ) ]
-                            , send ( cogMsg ResetLogoCog )
+                            , send ( Cog LogoCog StartGears )
                             ]
                     )
              )
