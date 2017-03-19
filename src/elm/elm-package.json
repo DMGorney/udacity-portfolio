@@ -6,7 +6,8 @@
     "source-directories": [
         "src",
         "src/views",
-        "src/cog"
+        "src/cog",
+        "src/types"
     ],
     "exposed-modules": [],
     "dependencies": {

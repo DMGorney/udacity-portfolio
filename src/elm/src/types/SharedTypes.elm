@@ -1,4 +1,13 @@
-module CogTypes exposing (..)
+module SharedTypes exposing (..)
+
+import Animation
+
+type Msg
+    = NoOp
+    | Animate Animation.Msg
+    | Cog Name Trigger
+    | CogChunk Trigger
+    | CogEvent Event
 
 type Name
     = Greeting
@@ -26,9 +35,15 @@ type Trigger
     | MenuOpen
     | MenuClose
 
+type Event
+    = KickStart
+    | ToggleMenu
+    | MenuHover
+    | MenuUnhover
+
 type CogAnimMsg
     = ResetLogoCog
 
 type MenuState
-    = Open
-    | Closed
+    = MenuIsOpen
+    | MenuIsClosed
