@@ -99,6 +99,9 @@ update msg model =
         CogEvent event ->
             CogFile.handleEvent event update model
 
+        -- CogSequence sequence ->
+        --     CogFile.handleSequence sequence update model
+
 {--
 
 SUBSCRIPTIONS

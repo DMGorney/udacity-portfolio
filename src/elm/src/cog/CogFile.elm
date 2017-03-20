@@ -6,8 +6,7 @@ import Ease
 import Color
 import Update.Extra.Infix exposing ((:>))
 
-import CogFormat exposing ( named, initialize, initializeWith, animations,
-                            immediate )
+import CogFormat exposing ( named, initialize, initializeWith, immediate )
 
 import SharedTypes exposing (..)
 import CogGears
@@ -52,7 +51,7 @@ config initVars =
 --}
 
 type alias Vars =
-    { menuState : MenuState
+    { menuState : Collapsable
     , gearSpeedFactor : Float
     , logoCogDelay : Float
     , menuItemEasing : Ease.Easing
@@ -62,7 +61,7 @@ type alias Vars =
 initVars : Vars
 initVars =
     { menuState =
-        MenuIsClosed
+        Collapsed
     , gearSpeedFactor =
         0.8
     , logoCogDelay =
@@ -97,11 +96,11 @@ handleEvent event update model =
                     :> update ( CogChunk StartGears )
 
             ToggleMenu ->
-                if cogVars.menuState == MenuIsClosed then
+                if cogVars.menuState == Collapsed then
                     let
                         opened =
                             { cogVars
-                                | menuState = MenuIsOpen
+                                | menuState = Open
                             }
 
                     in
@@ -113,7 +112,7 @@ handleEvent event update model =
                     let
                         closed =
                             { cogVars
-                                | menuState = MenuIsClosed
+                                | menuState = Collapsed
                             }
 
                     in
@@ -123,15 +122,32 @@ handleEvent event update model =
                             :> update (CogChunk MenuClose)
 
             MenuHover ->
-                if cogVars.menuState == MenuIsClosed then
+                if cogVars.menuState == Collapsed then
                     (model, Cmd.none)
                         :> update (CogChunk MenuHovered)
                 else
                     (model, Cmd.none)
 
             MenuUnhover ->
-                if cogVars.menuState == MenuIsClosed then
+                if cogVars.menuState == Collapsed then
                     (model, Cmd.none)
                         :> update (CogChunk MenuUnhovered)
                 else
                     (model, Cmd.none)
+
+
+-- {--
+--     CogFile Sequences section.
+-- --}
+--
+-- handleSequence sequence update model =
+--     let
+--         bits =
+--             model.bits
+--
+--         cogVars =
+--             model.cogVars
+--
+--     in
+--         case sequence of
+--             GreetingsAppear ->

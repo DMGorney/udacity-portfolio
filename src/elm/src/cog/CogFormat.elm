@@ -15,7 +15,7 @@ type alias Config msg =
     }
 
 type alias Sequence msg =
-    ( SharedTypes.Trigger , List (Animation.Messenger.Step msg) )
+    ( SharedTypes.Trigger , ((Animation.Messenger.State msg) -> (Animation.Messenger.State msg)) )
 
 named : SharedTypes.Name -> (Config msg)
 named elementName =
@@ -57,21 +57,28 @@ initializeWith ( customDuration, customEasing ) initialStyle config =
             | init = styled
         }
 
-
-
-animations : (Config msg) -> (Config msg)
-animations config =
-    config
-
-(=>) : SharedTypes.Trigger -> List (Animation.Messenger.Step msg) -> Sequence msg
-(=>) trigger steps =
-    ( trigger, steps )
-
 immediate : SharedTypes.Trigger -> List (Animation.Messenger.Step msg) -> (Config msg) -> (Config msg)
 immediate trigger steps config =
     let
+        interrupt =
+            (Animation.interrupt steps)
+
         sequence =
-            trigger => steps
+            ( trigger, interrupt )
+
+    in
+        { config
+            | sequences = sequence :: config.sequences
+        }
+
+afterCurrent : SharedTypes.Trigger -> List (Animation.Messenger.Step msg) -> (Config msg) -> (Config msg)
+afterCurrent trigger steps config =
+    let
+        queued =
+            (Animation.queue steps)
+
+        sequence =
+            ( trigger, queued )
 
     in
         { config

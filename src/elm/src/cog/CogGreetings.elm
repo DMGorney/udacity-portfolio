@@ -6,67 +6,53 @@ import Ease
 import Time exposing (millisecond)
 import Color
 
+import CogFormat exposing ( named, initialize, initializeWith, immediate )
 import SharedTypes exposing (..)
 
 configShard vars =
-    [{ name = Greeting
-     , init =
-         styleWith
-             ( easing
-                 { duration = ( 1500 * millisecond)
-                 , ease = Ease.inOutCubic }
-             )
-             [ opacity 0
-             ]
-     , sequences =
-         [( Appear,
-             [ wait ( 3000 * millisecond )
-             , to
-                 [ opacity 1
-                 ]
-             ]
-          )
-         ]
-     }
+    [ named Greeting
+            |> initializeWith
+                ( 1500 , Ease.inOutCubic )
+                [ opacity 0
+                , display none
+                ]
+            |> immediate
+                Appear
+                    [ wait ( 3000 * millisecond )
+                    , set
+                        [ display block ]
+                    , to
+                        [ opacity 1
+                        ]
+                    ]
 
-    ,   { name = Introduction1
-     , init =
-         styleWith
-             ( easing
-                 { duration = ( 1500 * millisecond)
-                 , ease = Ease.inOutCubic }
-             )
-             [ opacity 0
-             ]
-     , sequences =
-         [( Appear,
-             [ wait ( 6000 * millisecond )
-             , to
-                 [ opacity 1
-                 ]
-             ]
-          )
-         ]
-     }
+    , named Introduction1
+            |> initializeWith
+                ( 1500 , Ease.inOutCubic )
+                [ opacity 0
+                , display none
+                ]
+            |> immediate
+                Appear
+                    [ wait ( 6000 * millisecond )
+                    , set
+                        [ display block ]
+                    , to
+                         [ opacity 1 ]
+                    ]
 
-    ,   { name = Introduction2
-     , init =
-         styleWith
-             ( easing
-                 { duration = ( 1500 * millisecond )
-                 , ease = Ease.inOutCubic
-                 }
-             )
-             [ opacity 0
-             ]
-     , sequences =
-         [( Appear,
-             [ wait ( 6100 * millisecond )
-             , to
-                 [ opacity 1
-                 ]
-             ]
-          )
-         ]
-     }
+    , named Introduction2
+            |> initializeWith
+                ( 1500 , Ease.inOutCubic )
+                [ opacity 0
+                , display none
+                ]
+            |> immediate
+                Appear
+                    [ wait ( 6100 * millisecond )
+                    , set
+                        [ display block ]
+                    , to
+                         [ opacity 1 ]
+                    ]
     ]

@@ -8,6 +8,7 @@ type Msg
     | Cog Name Trigger
     | CogChunk Trigger
     | CogEvent Event
+    -- | CogSequence Sequence
 
 type Name
     = Greeting
@@ -41,9 +42,12 @@ type Event
     | MenuHover
     | MenuUnhover
 
+-- type Sequence
+--     = GreetingsAppear
+
 type CogAnimMsg
     = ResetLogoCog
 
-type MenuState
-    = MenuIsOpen
-    | MenuIsClosed
+type Collapsable
+    = Open
+    | Collapsed

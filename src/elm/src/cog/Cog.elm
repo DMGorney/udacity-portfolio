@@ -29,7 +29,7 @@ type alias Config msg =
     }
 
 type alias Sequence msg =
-    ( SharedTypes.Trigger , List (Animation.Messenger.Step msg) )
+    ( SharedTypes.Trigger , ((Animation.Messenger.State msg) -> (Animation.Messenger.State msg)) )
 
 --INIT
 
@@ -88,19 +88,12 @@ make configList =
         processSequences name init rawSequences =
             let
                 processedSequences =
-                    ( EveryDict.fromList rawSequences )
-                        |> EveryDict.map processRawSequence
+                    EveryDict.fromList rawSequences
 
             in
                 { current = init
                 , sequences = processedSequences
                 }
-
-        processRawSequence trigger rawAnimation =
-            processRawAnimation rawAnimation
-
-        processRawAnimation rawAnimation =
-             Animation.interrupt rawAnimation
 
         populatedBitsDict =
             populateBitsDict processedBits
@@ -213,13 +206,13 @@ triggerBit bits name trigger =
 
         calculateTriggeredCurrent totalSequence =
             let
-                interrupt =
+                transition =
                     (EveryDict.get trigger totalSequence.sequences)
 
             in
-                case interrupt of
-                    Just interrupt ->
-                        ( interrupt totalSequence.current )
+                case transition of
+                    Just transition ->
+                        ( transition totalSequence.current )
                     Nothing ->
                         totalSequence.current
 
@@ -241,13 +234,13 @@ triggerChunk bits trigger =
                 sequences =
                     totalSequence.sequences
 
-                maybeInterrupt =
+                maybeTransition =
                     EveryDict.get trigger sequences
 
-                interrupted =
-                    case maybeInterrupt of
-                        Just interrupt ->
-                            interrupt totalSequence.current
+                transitioned =
+                    case maybeTransition of
+                        Just transition ->
+                            transition totalSequence.current
 
                         Nothing ->
                             totalSequence.current
@@ -255,7 +248,7 @@ triggerChunk bits trigger =
 
             in
                 { totalSequence
-                    | current = interrupted
+                    | current = transitioned
                 }
 
     in
