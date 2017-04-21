@@ -8,7 +8,7 @@ type Msg
     | Cog Name Trigger
     | CogChunk Trigger
     | CogEvent Event
-    -- | CogSequence Sequence
+    -- | CogTimeline Timeline
 
 type Name
     = Greeting
@@ -42,7 +42,7 @@ type Event
     | MenuHover
     | MenuUnhover
 
--- type Sequence
+-- type Timeline
 --     = GreetingsAppear
 
 type CogAnimMsg

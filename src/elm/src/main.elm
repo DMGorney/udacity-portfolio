@@ -99,8 +99,8 @@ update msg model =
         CogEvent event ->
             CogFile.handleEvent event update model
 
-        -- CogSequence sequence ->
-        --     CogFile.handleSequence sequence update model
+        -- CogTimeline timeline ->
+        --     CogFile.handleTimeline timeline update model
 
 {--
 

@@ -140,6 +140,7 @@ handleEvent event update model =
 --     CogFile Sequences section.
 -- --}
 --
+-- DEPRECATED replaced by Timeline, see below
 -- handleSequence sequence update model =
 --     let
 --         bits =
@@ -151,3 +152,15 @@ handleEvent event update model =
 --     in
 --         case sequence of
 --             GreetingsAppear ->
+
+-- EXPERIMENTAL Timeline feature UNFINISHED
+-- handleTimeline timeline update model =
+--     case timeline of
+--         GreetingsAppear ->
+--             newTimeline
+--                 |> delay 3000
+--                 |> untilFinished (Cog Greeting Appear)
+--                 |> wait 3000
+--                 |> untilFinished (Cog Introduction1 Appear)
+--                 |> wait 100
+--                 |> Cog Introduction2 Appear
